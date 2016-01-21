@@ -71,6 +71,7 @@ Describe "Add-Numbers" {
 }
 
 .EXAMPLE
+## Return Pending
 function Add-Numbers($a, $b) {
     return $a + $b
 }
@@ -88,28 +89,26 @@ Describing Add-Number
  [?] Add-numbers returns value 3
 ...
 
-
-.EXAMPLE
-# The test is marked 'Pending'
+## Return Skip
 function Add-Numbers($a, $b) {
     return $a + $b
 }
 
 Describe "Add-Numbers" {
-    $testCases = @(
-        @{ a = 2;     b = 3;       expectedResult = 5 }
-        @{ a = -2;    b = -2;      expectedResult = -4 }
-        @{ a = -2;    b = 2;       expectedResult = 0 }
-        @{ a = 'two'; b = 'three'; expectedResult = 'twothree' }
-    )
 
-    It 'Correctly adds <a> and <b> to get <expectedResult>' -TestCases $testCases -Pending {
-        param ($a, $b, $expectedResult)
-
-        $sum = Add-Numbers $a $b
-        $sum | Should Be $expectedResult
+    It 'Add-numbers returns value 3' -skip {
+        $sum = Add-Numbers 1, 2
+        $sum | Should Be 3
     }
 }
+## Returns
+...
+Describing Add-Number
+ [!] Add-numbers returns value 3
+...
+
+
+
 
 .LINK
 Describe
